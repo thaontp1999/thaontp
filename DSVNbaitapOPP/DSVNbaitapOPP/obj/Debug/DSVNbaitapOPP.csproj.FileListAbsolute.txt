@@ -1,0 +1,8 @@
+C:\Users\ttm-dev_2\source\repos\DSVNbaitapOPP\DSVNbaitapOPP\bin\Debug\DSVNbaitapOPP.exe.config
+C:\Users\ttm-dev_2\source\repos\DSVNbaitapOPP\DSVNbaitapOPP\bin\Debug\DSVNbaitapOPP.exe
+C:\Users\ttm-dev_2\source\repos\DSVNbaitapOPP\DSVNbaitapOPP\bin\Debug\DSVNbaitapOPP.pdb
+C:\Users\ttm-dev_2\source\repos\DSVNbaitapOPP\DSVNbaitapOPP\obj\Debug\DSVNbaitapOPP.csproj.AssemblyReference.cache
+C:\Users\ttm-dev_2\source\repos\DSVNbaitapOPP\DSVNbaitapOPP\obj\Debug\DSVNbaitapOPP.csproj.SuggestedBindingRedirects.cache
+C:\Users\ttm-dev_2\source\repos\DSVNbaitapOPP\DSVNbaitapOPP\obj\Debug\DSVNbaitapOPP.csproj.CoreCompileInputs.cache
+C:\Users\ttm-dev_2\source\repos\DSVNbaitapOPP\DSVNbaitapOPP\obj\Debug\DSVNbaitapOPP.exe
+C:\Users\ttm-dev_2\source\repos\DSVNbaitapOPP\DSVNbaitapOPP\obj\Debug\DSVNbaitapOPP.pdb

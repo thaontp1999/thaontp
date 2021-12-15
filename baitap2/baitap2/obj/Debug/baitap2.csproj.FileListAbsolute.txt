@@ -1,0 +1,8 @@
+C:\Users\ttm-dev_2\source\repos\baitap2\baitap2\bin\Debug\baitap2.exe.config
+C:\Users\ttm-dev_2\source\repos\baitap2\baitap2\bin\Debug\baitap2.exe
+C:\Users\ttm-dev_2\source\repos\baitap2\baitap2\bin\Debug\baitap2.pdb
+C:\Users\ttm-dev_2\source\repos\baitap2\baitap2\obj\Debug\baitap2.csproj.AssemblyReference.cache
+C:\Users\ttm-dev_2\source\repos\baitap2\baitap2\obj\Debug\baitap2.csproj.SuggestedBindingRedirects.cache
+C:\Users\ttm-dev_2\source\repos\baitap2\baitap2\obj\Debug\baitap2.csproj.CoreCompileInputs.cache
+C:\Users\ttm-dev_2\source\repos\baitap2\baitap2\obj\Debug\baitap2.exe
+C:\Users\ttm-dev_2\source\repos\baitap2\baitap2\obj\Debug\baitap2.pdb
