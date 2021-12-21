@@ -6,3 +6,11 @@ C:\Users\ttm-dev_2\source\repos\ConnectSQLServer\ConnectSQLServer\obj\Debug\Conn
 C:\Users\ttm-dev_2\source\repos\ConnectSQLServer\ConnectSQLServer\obj\Debug\ConnectSQLServer.csproj.CoreCompileInputs.cache
 C:\Users\ttm-dev_2\source\repos\ConnectSQLServer\ConnectSQLServer\obj\Debug\ConnectSQLServer.exe
 C:\Users\ttm-dev_2\source\repos\ConnectSQLServer\ConnectSQLServer\obj\Debug\ConnectSQLServer.pdb
+C:\Users\ttm-dev_2\Desktop\Source\ConnectSQLServer\ConnectSQLServer\bin\Debug\ConnectSQLServer.exe.config
+C:\Users\ttm-dev_2\Desktop\Source\ConnectSQLServer\ConnectSQLServer\bin\Debug\ConnectSQLServer.exe
+C:\Users\ttm-dev_2\Desktop\Source\ConnectSQLServer\ConnectSQLServer\bin\Debug\ConnectSQLServer.pdb
+C:\Users\ttm-dev_2\Desktop\Source\ConnectSQLServer\ConnectSQLServer\obj\Debug\ConnectSQLServer.csproj.AssemblyReference.cache
+C:\Users\ttm-dev_2\Desktop\Source\ConnectSQLServer\ConnectSQLServer\obj\Debug\ConnectSQLServer.csproj.SuggestedBindingRedirects.cache
+C:\Users\ttm-dev_2\Desktop\Source\ConnectSQLServer\ConnectSQLServer\obj\Debug\ConnectSQLServer.csproj.CoreCompileInputs.cache
+C:\Users\ttm-dev_2\Desktop\Source\ConnectSQLServer\ConnectSQLServer\obj\Debug\ConnectSQLServer.exe
+C:\Users\ttm-dev_2\Desktop\Source\ConnectSQLServer\ConnectSQLServer\obj\Debug\ConnectSQLServer.pdb

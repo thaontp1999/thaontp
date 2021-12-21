@@ -35,6 +35,7 @@ namespace ConnectSQLServer
                 conn.Open();
 
                 QueryEmployee(conn);
+                Console.WriteLine("------------------------------------------------------------------------------------------");
 
                 Console.WriteLine("Connection successful!");
             }
@@ -61,7 +62,8 @@ namespace ConnectSQLServer
             {
                 if (reader.HasRows)
                 {
-
+                    Console.WriteLine("{0,-4}|{1,10}|{2,5}|{3,5}|{4,5}|", "ID  ", "          TenDT            ", "    Gia        ", "      ThoiDiemNhap          ", "  SoLanXem ");
+                    Console.WriteLine("------------------------------------------------------------------------------------------"); 
                     while (reader.Read())
                     {
                         // Chỉ số của cột Emp_ID trong câu lệnh SQL.
@@ -83,12 +85,28 @@ namespace ConnectSQLServer
                         //{
                         //    mngId = Convert.ToInt64(reader.GetValue(mngIdIndex));
                         //}
-                        Console.WriteLine("--------------------");
-                        Console.WriteLine("idDT:" + idDT);
-                        Console.WriteLine("TenDT:" + TenDT);
-                        Console.WriteLine("Gia:" + Gia);
-                        Console.WriteLine("ThoiDienNhap:" + ThoiDiemNhap);
-                        Console.WriteLine("SoLanXem:" + SoLanXem );
+
+                        //, "ID", "Hoten", "Gioitinh", "ngaysinh", "diachi", "chucvu"); // "{0, -5} {1, 10} {2, 10} {3, 10} {4, 10} {5, 5}", "ID", "Hoten", "Gioitinh", "ngaysinh", "diachi", "chucvu"
+                        if (TenDT.Length < 25)
+                        {
+                            var noichuoi = "";
+                            for (int i = TenDT.Length; i < 25; i++)
+                            {
+                                noichuoi += " ";
+                            }
+
+                            TenDT = TenDT + noichuoi;
+                            
+                        }
+
+
+                        Console.WriteLine("{0,4}| {1,3}\t|  {2,-2}\t|   {3,2}   |\t{4,2}\t |",  idDT, TenDT, Gia, ThoiDiemNhap, SoLanXem);
+                        //Console.WriteLine("--------------------");
+                        //Console.WriteLine("idDT:" + idDT);
+                        //Console.WriteLine("TenDT:" + TenDT);
+                        //Console.WriteLine("Gia:" + Gia);
+                        //Console.WriteLine("ThoiDienNhap:" + ThoiDiemNhap);
+                        //Console.WriteLine("SoLanXem:" + SoLanXem );
                         Console.WriteLine();
 
                     }
