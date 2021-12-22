@@ -34,10 +34,19 @@ namespace ConnectSQLServer
                 
                 conn.Open();
 
-                QueryEmployee(conn);
-                Console.WriteLine("------------------------------------------------------------------------------------------");
+                //QueryDienthoai(conn);
+                //Console.WriteLine("------------------------------------------------------------------------------------------");
 
-                Console.WriteLine("Connection successful!");
+                //Console.WriteLine("Connection successful!");
+                //InsertDB(conn);
+                //QueryDienthoai(conn);
+
+                //UpdateDB(conn);
+
+                //QueryDienthoai(conn);
+
+                DeleteDB(conn);
+                QueryDienthoai(conn);
             }
             catch (Exception e)
             {
@@ -48,7 +57,7 @@ namespace ConnectSQLServer
 
             
             }
-        public static void QueryEmployee(SqlConnection conn)
+        public static void QueryDienthoai(SqlConnection conn)
         {
             string sql = "Select idDT, TenDT, Gia, ThoiDiemNhap, SoLanXem from Dien_Thoai";
 
@@ -111,6 +120,65 @@ namespace ConnectSQLServer
 
                     }
                 }
+            }
+        }
+        public static void InsertDB(SqlConnection conn)
+        {
+            string query = string.Empty;
+            //SqlConnection conn = new SqlConnection("Data Source=DESKTOP-HSAI5KE;Initial Catalog=PHONE;Integrated Security=True");
+            try
+            {
+                //conn.Open();
+                query = "INSERT INTO Dien_Thoai(TenDT, Gia, ThoiDiemNhap, SoLanXem) VALUES('Dien Thoai vua them ', '15000000', '20211222', 9)";
+                SqlCommand sqlCommand = new SqlCommand(query, conn);
+                sqlCommand.Connection = conn;
+                sqlCommand.CommandText = query;
+                int i = sqlCommand.ExecuteNonQuery();
+                Console.WriteLine("Da insert [" + i.ToString() + "] du lieu");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+
+        public static void UpdateDB(SqlConnection conn)
+        {
+            string query = string.Empty;
+            //SqlConnection conn = new SqlConnection("Data Source=DESKTOP-HSAI5KE;Initial Catalog=PHONE;Integrated Security=True");
+            try
+            {
+                //conn.Open();
+                query = " UPDATE Dien_Thoai SET TenDT = 'Dien Thoai vua sua ', Gia = '20000000', ThoiDiemNhap = '20211223', SoLanXem = 10 WHERE idDT = '1007'";
+                SqlCommand sqlCommand = new SqlCommand(query, conn);
+                sqlCommand.Connection = conn;
+                sqlCommand.CommandText = query;
+                int i = sqlCommand.ExecuteNonQuery();
+                Console.WriteLine("Da update [" + i.ToString() + "] du lieu");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+
+        public static void DeleteDB(SqlConnection conn)
+        {
+            string query = string.Empty;
+            //SqlConnection conn = new SqlConnection("Data Source=DESKTOP-HSAI5KE;Initial Catalog=PHONE;Integrated Security=True");
+            try
+            {
+                //conn.Open();
+                query = " DELETE Dien_Thoai WHERE idDT = '1007'";
+                SqlCommand sqlCommand = new SqlCommand(query, conn);
+                sqlCommand.Connection = conn;
+                sqlCommand.CommandText = query;
+                int i = sqlCommand.ExecuteNonQuery();
+                Console.WriteLine("Da xoa [" + i.ToString() + "] du lieu");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
             }
         }
     }

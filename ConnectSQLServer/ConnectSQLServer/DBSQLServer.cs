@@ -13,7 +13,7 @@ namespace connectsqlserver
     {   //tạo kết nối
         SqlConnection connect = new SqlConnection("Data Source=DESKTOP-HSAI5KE;Initial Catalog=PHONE;Integrated Security=True");
         public void Form_Load(object sender, EventArgs e)
-        {
+        {   // hàm mấu select dữ liệu
             connect.Open(); //mở kết nối
             string sql = "SELECT TenDT, GiaKM, SoLuongTonKho, HeDieuHanh From Dien_Thoai FUll OUter JOIN Thuoc_TinhDT ON Dien_Thoai.idDT = Thuoc_TinhDT.idDT "; //câu lệnh SQl
             SqlCommand cmd = new SqlCommand(sql, connect); //thực hiện lệnh truy vấn
@@ -24,7 +24,28 @@ namespace connectsqlserver
             connect.Close();
             
         }
+        // Hàm mẫu Chèn dữ liệu vào DB
+        public void InsertDB(object sender, EventArgs e)
+        {
+            string query = string.Empty;
+            SqlConnection conn = new SqlConnection("Data Source=DESKTOP-HSAI5KE;Initial Catalog=PHONE;Integrated Security=True");
+            try
+            {
+                connect.Open();
+                query = "INSERT INTO sinhvien(masv, tensv, diemtoan, diemvan) VALUES('TH003', 'Tran Thi A', 8, 9)";
+                SqlCommand sqlCommand = new SqlCommand(query, connect);
+                sqlCommand.Connection = connect;
+                sqlCommand.CommandText = query;
+                int i = sqlCommand.ExecuteNonQuery();
+                Console.WriteLine("Đã insert [" + i.ToString() + "] dữ liệu");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
     }
     
+
         
 }
