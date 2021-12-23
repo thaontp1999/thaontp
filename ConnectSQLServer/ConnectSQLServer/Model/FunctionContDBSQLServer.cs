@@ -62,8 +62,7 @@ namespace ConnectSQLServer.Model
                             TenDT = TenDT + noichuoi;
 
                         }
-
-
+                        
                         Console.WriteLine("{0,4}| {1,3}\t|  {2,-2}\t|   {3,2}   |\t{4,2}\t |", idDT, TenDT, Gia, ThoiDiemNhap, SoLanXem);
                         //Console.WriteLine("--------------------");
                         //Console.WriteLine("idDT:" + idDT);
