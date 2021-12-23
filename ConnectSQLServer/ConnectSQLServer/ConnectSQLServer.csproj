@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="BSUtils.cs" />
     <Compile Include="DBSQLServer.cs" />
+    <Compile Include="Model\FunctionContDBSQLServer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
