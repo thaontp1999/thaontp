@@ -217,7 +217,7 @@ namespace ConnectSQLServer.Model
                 foreach (DataColumn column in dt.Tables[0].Columns)
                 {
                     string ColumnName = column.ColumnName;
-                    if (column.Co)
+                    //if (column.Co)
                     Console.Write(column.ColumnName + "  |  ");
                     
                 }
