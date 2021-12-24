@@ -10,6 +10,7 @@ using System.Collections.Specialized;
 using ConnectSQLServer.Model;
 
 
+
 namespace ConnectSQLServer
 {
     internal class Program
@@ -52,7 +53,7 @@ namespace ConnectSQLServer
                 //QueryDienthoai(conn);
                 Console.WriteLine("------------------------------------------------------------------------------------------");
                 FunctionContDBSQLServer.thaotac(conn);
-                
+
                 //InsertDB(conn);
                 //QueryDienthoai(conn);
 
@@ -62,6 +63,7 @@ namespace ConnectSQLServer
 
                 //DeleteDB(conn);
                 //QueryDienthoai(conn);
+                conn.Close();// nên đóng lại DB để tránh tốn tài nguyên
             }
             catch (Exception e)
             {

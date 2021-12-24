@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DSVNbaitapOPP;
+
 
 namespace DSVNbaitapOPP.Model
 {
-    public class quanlynhanvien
+    public  class quanlynhanvien
     {
         private List<DSNV> ListDSNV = null;
         //taoID tự động
-        public quanlynhanvien()
+        public  quanlynhanvien()
         {
             ListDSNV = new List<DSNV>();
         }
@@ -159,6 +161,7 @@ namespace DSVNbaitapOPP.Model
                     nv.chucvu = CV;
                 }
                 ListDSNV.Add(nv);
+                thaotac();
             }
 
 
@@ -188,7 +191,48 @@ namespace DSVNbaitapOPP.Model
                 }
             }
         }
+        public  void thaotac()
+        {
+            try
+            {
+                Console.WriteLine(" 1. Hay nhap 1 de them nhan vien moi**");
+                Console.WriteLine(" 2. Hay nhap 2 de hien thi danh sach nhan vien");
+                Console.WriteLine(" 3. Hay nhap 0 de thoat");
+                int key = Convert.ToInt32(Console.ReadLine());
+                switch (key)
+                {
+                    case 1:
+                        Console.WriteLine("Them nham vien");
+                        ttnv();
+                        break;
+                    case 2:
 
+                        Console.WriteLine("In danh sach nhan vien");
+                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------");
+                        hienthi();
+                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------");
+                        break;
+                    case 0:
+                        Console.WriteLine("Ban da thoat chuong trinh");
+                        return;
+
+                    default:
+                        Console.WriteLine("Chi chon 0,  1 hoac 2");
+                        thaotac();
+                        break;
+
+                }
+                Console.ReadLine();
+
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Loi exception nhap ky tu khong phai la so");
+                thaotac();
+                throw;
+            }
+
+        }
         //public void Chonlenh()
         //{
         //    Console.WriteLine(" 1. Hay nhap 1 de them nhan vien moi**");

@@ -7,11 +7,16 @@ using System.Threading.Tasks;
 using System.Configuration;
 using ConnectSQLServer;
 using System.Data.Common;
+using System.Data;
+using System.Drawing;
+
+
 
 namespace ConnectSQLServer.Model
 {
     public class FunctionContDBSQLServer
     {
+        
         public static void QueryDienthoai(SqlConnection conn)
         {
             string sql = "Select idDT, TenDT, Gia, ThoiDiemNhap, SoLanXem from Dien_Thoai";
@@ -99,9 +104,30 @@ namespace ConnectSQLServer.Model
                 sqlCommand.CommandText = query;
                 int i = sqlCommand.ExecuteNonQuery();
                 Console.WriteLine("Da insert [" + i.ToString() + "] du lieu");
+
+                //Cách khác dùng đẻ insert dữ liệu vào bảng
+                //void AddData(SqlConnection conn, String fullName, String addr, String phoneNumber, String email)
+                //{ 
+                //        conn.Open();
+                //        SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Phonebook", conn);
+                //        SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+                //        DataSet dataSet = new DataSet();
+                //        adapter.Fill(dataSet, "Phonebook");
+                //        DataRow dataRow = dataSet.Tables["Phonebook"].NewRow();
+                //        dataRow["fullname"] = fullName;
+                //        dataRow["addr"] = addr;
+                //        dataRow["phonenumber"] = phoneNumber;
+                //        dataRow["email"] = email;
+                //        dataSet.Tables["Phonebook"].Rows.Add(dataRow);
+                //        adapter.Update(dataSet, "Phonebook");
+                //        conn.Close();
+                //}   
+
+
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Ban nhap sai dinh dang cac truong roi.");
                 Console.WriteLine(ex.StackTrace);
             }
         }
@@ -120,11 +146,18 @@ namespace ConnectSQLServer.Model
                 SqlCommand sqlCommand = new SqlCommand(query, conn);
                 sqlCommand.Connection = conn;
                 sqlCommand.CommandText = query;
-                int i = sqlCommand.ExecuteNonQuery();
+                int i = 0;
+                 i = sqlCommand.ExecuteNonQuery();
+                if ( i == 0 )
+                {
+                    Console.WriteLine(" 0 row(s) da update");
+                }
+                else
                 Console.WriteLine("Da update [" + i.ToString() + "] du lieu");
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Ban nhap sai dinh dang cau query roi.");
                 Console.WriteLine(ex.StackTrace);
             }
         }
@@ -149,11 +182,71 @@ namespace ConnectSQLServer.Model
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Ban nhap sai dinh dang cau query roi.");
                 Console.WriteLine(ex.StackTrace);
             }
         }
 
+        public static void Search(SqlConnection conn)
+        {
+            string query = string.Empty;
+            DataSet dt = new DataSet();
 
+            //SqlConnection conn = new SqlConnection("Data Source=DESKTOP-HSAI5KE;Initial Catalog=PHONE;Integrated Security=True");
+            try
+            {
+                //conn.Open();
+                Console.WriteLine("Ban hay nhap thoi diem nhap cquery update : ");
+                Console.WriteLine("Ex : SELECT idDT, TenDT, Gia, ThoiDiemNhap, SoLanXem FROM Dien_Thoai Where idDT like '%100%';");
+                query = Convert.ToString(Console.ReadLine());
+                //query =  " UPDATE Dien_Thoai SET TenDT = 'Dien Thoai vua sua ', Gia = '20000000', ThoiDiemNhap = '20211223', SoLanXem = 10 WHERE idDT = '1008'";
+                SqlCommand sqlCommand = new SqlCommand(query, conn);
+                sqlCommand.CommandType = CommandType.Text;
+                SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
+                sqlCommand.Connection = conn;
+                da.Fill(dt);
+
+                
+                //dt.Tables[0].TableName = "Dien Thoai"; --cú pháp đặt tên cho bảng 0 vừa select đc
+                //dataSet.Tables[1].TableName = "Orders";--cú pháp đặt tên cho bảng 2 vừa select đc
+
+                //Console.WriteLine("---------------------------------------------------------------------------------");
+                //Console.WriteLine("{0,-3}|{1,10}|{2,5}|{3,5}|{4,5}|", " ID  ", "          TenDT          ", "        Gia       ", "    ThoiDiemNhap     ", "         SoLanXem     ");
+                
+                Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+                foreach (DataColumn column in dt.Tables[0].Columns)
+                {
+                    string ColumnName = column.ColumnName;
+                    if (column.Co)
+                    Console.Write(column.ColumnName + "  |  ");
+                    
+                }
+                Console.ReadLine();
+                Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+
+                foreach (DataRow row in dt.Tables[0].Rows)
+
+                {
+
+                    foreach (DataColumn column in dt.Tables[0].Columns)
+                    {
+                        string ColumnName = column.ColumnName;
+                        string ColumnData = row[column].ToString();
+                        //Console.WriteLine(column.ColumnName + "  |  ");
+                        Console.Write(row[column] + " |  ");
+                    }
+                    Console.WriteLine();
+                    
+                    //Console.WriteLine(row["idDT"] + "|  " + row["TenDT"] + "|  " + row["Gia"] + "|  " + row["ThoiDiemNhap" ]+ "|  " + row["SoLanXem"] + "|  ");
+                }
+                Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ban nhap sai dinh dang cau query roi.");
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
         public static void thaotac(SqlConnection conn)
         {
             try
@@ -162,6 +255,7 @@ namespace ConnectSQLServer.Model
                 Console.WriteLine(" 2. Hay nhap 2 de Update du lieu trong bang. ");
                 Console.WriteLine(" 3. Hay nhap 3 de Xoa du lieu trong bang.");
                 Console.WriteLine(" 4. Hay nhap 4 de Xem du lieu trong bang.");
+                Console.WriteLine(" 5. Hay nhap 5 de tim kiem du lieu trong bang.");
                 int key = Convert.ToInt32(Console.ReadLine());
                 switch (key)
                 {
@@ -181,6 +275,10 @@ namespace ConnectSQLServer.Model
                         return;
                     case 4:
                         QueryDienthoai(conn);
+                        thaotac(conn);
+                        break;
+                    case 5:
+                        Search(conn);
                         thaotac(conn);
                         break;
                     default:
