@@ -6,3 +6,11 @@ C:\Users\ttm-dev_2\source\repos\btap3\btap3\obj\Debug\btap3.exe
 C:\Users\ttm-dev_2\source\repos\btap3\btap3\obj\Debug\btap3.pdb
 C:\Users\ttm-dev_2\source\repos\btap3\btap3\bin\Debug\btap3.pdb
 C:\Users\ttm-dev_2\source\repos\btap3\btap3\obj\Debug\btap3.csproj.AssemblyReference.cache
+C:\Users\ttm-dev_2\Desktop\Source\btap3\btap3\obj\Debug\btap3.csproj.AssemblyReference.cache
+C:\Users\ttm-dev_2\Desktop\Source\btap3\btap3\obj\Debug\btap3.csproj.SuggestedBindingRedirects.cache
+C:\Users\ttm-dev_2\Desktop\Source\btap3\btap3\obj\Debug\btap3.csproj.CoreCompileInputs.cache
+C:\Users\ttm-dev_2\Desktop\Source\btap3\btap3\obj\Debug\btap3.exe
+C:\Users\ttm-dev_2\Desktop\Source\btap3\btap3\obj\Debug\btap3.pdb
+C:\Users\ttm-dev_2\Desktop\Source\btap3\btap3\bin\Debug\btap3.exe.config
+C:\Users\ttm-dev_2\Desktop\Source\btap3\btap3\bin\Debug\btap3.exe
+C:\Users\ttm-dev_2\Desktop\Source\btap3\btap3\bin\Debug\btap3.pdb
