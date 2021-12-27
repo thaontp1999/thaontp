@@ -243,14 +243,22 @@ namespace ConnectSQLServer.Model
             {
                 //conn.Open();
                 //query = " DELETE Dien_Thoai WHERE idDT = '1008'";
-                Console.WriteLine("Ban hay nhap thoi diem nhap query xoa du lieu : ");
-                Console.WriteLine("Ex : DELETE Dien_Thoai WHERE idDT = '1008' ");
-                query = Convert.ToString(Console.ReadLine());
-                SqlCommand sqlCommand = new SqlCommand(query, conn);
-                sqlCommand.Connection = conn;
-                sqlCommand.CommandText = query;
-                int i = sqlCommand.ExecuteNonQuery();
-                Console.WriteLine("Da xoa [" + i.ToString() + "] du lieu");
+
+                //cách 1 nhạp từ ban phím câu query để xóa
+                //Console.WriteLine("Ban hay nhap query de xoa du lieu trong bang : ");
+                //Console.WriteLine("Vi dụ: DELETE Dien_Thoai WHERE idDT = '1008'");
+                //query = Convert.ToString(Console.ReadLine());
+                //SqlCommand sqlCommand = new SqlCommand(query, conn);
+                //sqlCommand.Connection = conn;
+                //sqlCommand.CommandText = query;
+                //int i = sqlCommand.ExecuteNonQuery();
+                //Console.WriteLine("Da xoa [" + i.ToString() + "] du lieu");
+
+                //cách 2 xóa bằng cách truyền SQL parameter;
+                Console.WriteLine("Ban hay nhap ID dien thoai muon xoa du lieu : ");
+                int id = Convert.ToInt32(Console.ReadLine());
+                DeleteSQL( id, conn);
+                thaotac(conn);
 
             }
             catch (Exception ex)
@@ -642,7 +650,6 @@ namespace ConnectSQLServer.Model
                 //    //Console.WriteLine(column.ColumnName + "  |  ");
                    
                 //}
-                Console.WriteLine();
             }
             Console.WriteLine("-------------------------------------------------------------------------------------------");
         }
@@ -776,9 +783,38 @@ namespace ConnectSQLServer.Model
                 //    //Console.WriteLine(column.ColumnName + "  |  ");
 
                 //}
-                Console.WriteLine();
+               
             }
             Console.WriteLine("-------------------------------------------------------------------------------------------");
+        }
+
+        private static void DeleteSQL(int id,  SqlConnection conn)
+        {
+            // Update the demographics for a store, which is stored
+            // in an xml column.
+
+            string commandText = "DELETE Dien_Thoai WHERE idDT = @id ";
+            SqlCommand command = new SqlCommand(commandText, conn);
+            command.Parameters.Add("@id", SqlDbType.Int);
+            command.Parameters["@id"].Value = id;
+
+            // Use AddWithValue to assign Demographics.
+            // SQL Server will implicitly convert strings into XML.
+            //command.Parameters.AddWithValue("@ten", ten);
+
+            try
+            {
+                //conn.Open();
+                Int32 rowsAffected = command.ExecuteNonQuery();
+                Console.WriteLine("RowsAffected: {0}", rowsAffected);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
+
         }
     }
        
