@@ -92,16 +92,49 @@ namespace ConnectSQLServer.Model
             {
                 //conn.Open();
                 Console.WriteLine("Ban hay nhap ten dien thoai");
-                string nameDT = Convert.ToString(Console.ReadLine());
+                string nameDT0 = Convert.ToString(Console.ReadLine());
+                string nameDT = nameDT0.Trim();
+                if (nameDT == null)
+                {
+                    Console.WriteLine("Truong khong duoc de trong.");
+                    Console.WriteLine("Ban hay nhap ten dien thoai");
+                     nameDT0 = Convert.ToString(Console.ReadLine());
+                     nameDT = nameDT0.Trim();
+                }
+
                 Console.WriteLine("Ban hay nhap gia dien thoai (dong)");
-                string Gia = Convert.ToString(Console.ReadLine());
+                string Gia0 = Convert.ToString(Console.ReadLine());
+                string Gia = Gia0.Trim();
+                if (Gia == null)
+                {
+                    Console.WriteLine("Truong khong duoc de trong.");
+                    Console.WriteLine("Ban hay nhap ten dien thoai");
+                    Gia0 = Convert.ToString(Console.ReadLine());
+                    Gia = Gia0.Trim();
+                }
+
                 Console.WriteLine("Ban hay nhap thoi diem nhap hang dinh dang yyyymmdd: ");
-                string TimeNhap = Convert.ToString(Console.ReadLine());
+                string TimeNhap0 = Convert.ToString(Console.ReadLine());
+                string TimeNhap = TimeNhap0.Trim();
+                if (TimeNhap == null)
+                {
+                    Console.WriteLine("Truong khong duoc de trong.");
+                    Console.WriteLine("Ban hay nhap ten dien thoai");
+                    TimeNhap0 = Convert.ToString(Console.ReadLine());
+                    TimeNhap = TimeNhap0.Trim();
+                }
                 //Console.WriteLine("B hay nhap so luong ton kho");
                 //int soluongtonkho = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Ban hay nhap so lan xem");
-                int view = Convert.ToInt32(Console.ReadLine());
-
+                string view0 = Convert.ToString(Console.ReadLine());
+                int view = Convert.ToInt32(view0.Trim());
+                if (view == null)
+                {
+                    Console.WriteLine("Truong khong duoc de trong.");
+                    Console.WriteLine("Ban hay nhap ten dien thoai");
+                    view0 = Convert.ToString(Console.ReadLine());
+                    view = Convert.ToInt32(view0.Trim());
+                }
                 /*C1 noi chuoi sẽ bị tan cong vào DB
                 //query = "INSERT INTO Dien_Thoai(TenDT, Gia, ThoiDiemNhap, SoLanXem) VALUES("; query += "N'" + nameDT + "',N'" + Gia + "','" + TimeNhap + "',N'" + view + "')";
                 //SqlCommand sqlCommand = new SqlCommand(query, conn);
@@ -190,7 +223,9 @@ namespace ConnectSQLServer.Model
                 {
                     case 1:
                         Console.WriteLine("Nhap ten dien thoai  sua moi. ");
-                        string fixname = Convert.ToString(Console.ReadLine());
+                        string fixname0 = Convert.ToString(Console.ReadLine());
+                        string fixname = fixname0.Trim();
+
                         UpdateSQL1(fixname, id, conn);
                         break;
 
@@ -465,7 +500,6 @@ namespace ConnectSQLServer.Model
 
         }
 
-
         private static void UpdateSQL1(string fixname, string id, SqlConnection conn)
         {
             // Update the demographics for a store, which is stored
@@ -697,7 +731,6 @@ namespace ConnectSQLServer.Model
         {
 
             DataSet dt = new DataSet();
-
             string query = "SELECT idDT, TenDT, Gia, ThoiDiemNhap, SoLanXem FROM Dien_Thoai Where Thoidiemnhap >= @thoidiemnhap";
             SqlCommand sqlCommand = new SqlCommand(query, conn);
             sqlCommand.Parameters.AddWithValue("@thoidiemnhap", thoidiemnhap);
@@ -812,10 +845,204 @@ namespace ConnectSQLServer.Model
             {
                 Console.WriteLine(ex.Message);
             }
+        }
 
+        private static void GetGia(SqlConnection conn)
+        {
+            DataSet dt = new DataSet();
+            string query = "SELECT Gia FROM Dien_Thoai ";
+            SqlCommand sqlCommand = new SqlCommand(query, conn);
+            SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
+            da.Fill(dt);
+            foreach (DataRow row in dt.Tables[0].Rows)
 
+            {
+                double gia = Convert.ToDouble(row["Gia"]);
+
+            }
 
         }
+        public static void VAT(SqlConnection conn)
+        {
+            Console.WriteLine("Nhap % tinh thue VAT gia dien thoai.");
+            string VAT0 = Convert.ToString(Console.ReadLine());
+            int VAT = Convert.ToInt32(VAT0.Trim());
+            double thueVAT = 0;
+            if (VAT == null)
+            {
+                Console.WriteLine("Truong khong duoc de trong.");
+                Console.WriteLine("Ban hay nhap ten dien thoai");
+                VAT0 = Convert.ToString(Console.ReadLine());
+                VAT = Convert.ToInt32(VAT0.Trim());
+            }
+            DataSet dt = new DataSet();
+            string query = "SELECT idDT, TenDT, Gia FROM Dien_Thoai ";
+            SqlCommand sqlCommand = new SqlCommand(query, conn);
+            SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
+            da.Fill(dt);
+            foreach (DataRow row in dt.Tables[0].Rows)
+
+            {
+                double gia = Convert.ToDouble(row["Gia"]);
+                thueVAT = (VAT * gia) / 100;
+            }
+            
+        }
+        public static void Creprocedure (SqlConnection conn)
+        {
+
+            Console.WriteLine("Nhap % tinh thue VAT gia dien thoai.");
+            int VAT = Int32.Parse(Console.ReadLine());
+            //int VAT = Convert.ToInt32(VAT0.Trim());(Console.ReadLine());
+            //if (VAT == null)
+            //{
+            //    Console.WriteLine("Truong khong duoc de trong.");
+            //    Console.WriteLine("Ban hay nhap ten dien thoai");
+            //    VAT0 = Convert.ToString(Console.ReadLine());
+            //    VAT = Convert.ToInt32(VAT0.Trim());
+            //}
+            string query = "IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'spTinhTonggiadienthoai')"
+                        + "DROP PROCEDURE spTinhTonggiadienthoai"
+                        + "GO"
+                        //+ "SET ANSI_NULLS ON"
+                        //+ "GO "
+                        //+ "SET QUOTED_IDENTIFIER ON"
+                        //+ "GO"
+                        + "CREATE PROCEDURE spTinhTonggiadienthoai"
+                        + "(@VAT int )"
+                        + "AS "
+                        + "BEGIN"
+                        + "	SELECT idDT, TenDT, Gia, (@VAT*Gia)/100 AS GiaThueDT InTO #GiaDT From Dien_Thoai order by idDT"
+                        + "ALTER TABLE #GiaDT "
+                        + "ADD GiaDTgomVAT AS(GiaThueDT + Gia)"
+                        + "SELECT* FROM #GiaDT Order by idDT"
+                        + "END";
+                        //+ "GO"
+                        //+"EXEC spTinhTonggiadienthoai ;"
+
+                        //+ " GO";
+            SqlCommand command = new SqlCommand(query, conn);
+            command.Parameters.Add("@VAT", SqlDbType.Int).Value= VAT;
+            //command.Parameters["@VAT"].Value = VAT;
+            query = "EXECUTE spTinhTonggiadienthoai @VAT = " +VAT;
+            command = new SqlCommand(query, conn);
+            DataSet dt = new DataSet();
+            SqlDataAdapter da = new SqlDataAdapter(command);
+            da.Fill(dt);
+            Console.WriteLine("--------------------------------------------------------------------------------------------------");
+            Console.WriteLine("{0,-4} | {1,3}|  {2,2} \t| {3,2} |\t{4,2} |", "  ID  ", "          TenDT          ", "    Gia       ", "    GiaThueDT    ", "  GiaDTgomVAT   "); //"{0,-4}|{1,10}|{ 2,5}|{ 3,5}|{ 4,5}|"
+            Console.WriteLine("--------------------------------------------------------------------------------------------------");
+            foreach (DataRow row in dt.Tables[0].Rows)
+
+            {
+                string idDT = row["idDT"].ToString();
+                string tenDT = row["TenDT"].ToString() ;
+                
+                string gia = row["Gia"].ToString() ;
+                string GiaThueDT = row["GiaThueDT"].ToString();
+                string GiaDTgomVAT = row["GiaDTgomVAT"].ToString();
+                if (tenDT.Length < 25)
+                {
+                    var noichuoi = "";
+                    for (int i = tenDT.Length; i < 25; i++)
+                    {
+                        noichuoi += " ";
+                    }
+
+                    tenDT = tenDT + noichuoi;
+                }
+                else if (tenDT.Length >= 25) 
+                {
+                    var ngat = "";
+                    for (int i = tenDT.Length; i < tenDT.Length-25; i++)
+                    {
+                        ngat += "[i]";
+                    }
+
+                    tenDT = ngat;
+                }
+
+
+                if (gia.Length < 10)
+                {
+                    var noichuoi = "";
+                    for (int i = gia.Length; i < 10; i++)
+                    {
+                        noichuoi += " ";
+                    }
+
+                    gia = gia + noichuoi;
+                }
+
+
+                if (GiaThueDT.Length < 15)
+                {
+                    var noichuoi = "";
+                    for (int i = GiaThueDT.Length; i < 15; i++)
+                    {
+                        noichuoi += " ";
+                    }
+
+                    GiaThueDT = GiaThueDT + noichuoi;
+                }
+
+                if (GiaDTgomVAT.Length < 10)
+                {
+                    var noichuoi = "";
+                    for (int i = GiaDTgomVAT.Length; i < 10; i++)
+                    {
+                        noichuoi += " ";
+                    }
+
+                    GiaDTgomVAT = GiaDTgomVAT + noichuoi;
+                }
+
+                Console.WriteLine("  {0,4} | {1,3}|  {2,2} \t|   {3,2} |\t{4,2}\t |", idDT, tenDT, gia, GiaThueDT, GiaDTgomVAT);
+                //trong đó số đầu tiên bên trong dấu ngoặc nhọn là chỉ mục và số thứ hai là căn chỉnh. Dấu của số thứ hai cho biết chuỗi nên được căn trái hay phải. Sử dụng số âm cho căn lề trái.
+
+                //Console.WriteLine(" {0,4} | {1,3}|  {2,-2}    |   {3,2}   | {4,2} |", idDT, tenDT, gia, ThoiDiemNhap, SoLanXem);
+                //Console.Write(" " + row[column] + " |  ");
+                //foreach (DataColumn column in dt.Tables[0].Columns)
+                //{
+                //    // string ColumnName = column.ColumnName;
+                //    //string ColumnData = row[column].ToString();
+                //    //Console.WriteLine(column.ColumnName + "  |  ");
+
+                //}
+            }
+            Console.WriteLine("--------------------------------------------------------------------------------------------------");
+            
+            
+            //SqlCommand cmd = new SqlCommand("spTinhTonggiadienthoai", conn);
+            //cmd.CommandType = CommandType.StoredProcedure;
+            //cmd.Parameters.Add(new SqlParameter("@result", SqlDbType.Float) { Direction = ParameterDirection.Output });
+            //conn.Open();
+            //var ki = cmd.ExecuteNonQuery();
+            //var Tonggiadienthoai = cmd.Parameters["@result"].Value.ToString();
+            //Console.WriteLine("Tong gia dien thoai: " + Tonggiadienthoai+ " (dong)");
+
+
+            //tạo đối tượng command
+            //SqlCommand cmd = new SqlCommand()
+            //{
+            //    CommandText = "spGet",
+            //    Connection = conn,
+            //    CommandType = CommandType.StoredProcedure
+            //};
+            //khai báo các thuộc tính của tham số
+            //SqlParameter param = new SqlParameter
+            //{
+            //    ParameterName = "@Id",
+            //    SqlDbType = SqlDbType.Int,
+            //    Value = 101,
+            //    Direction = ParameterDirection.Input
+            //};
+            ////thêm tham số vào đối tượng SqlCommand
+            //cmd.Parameters.Add(param);
+
+        }
+
     }
+        
        
  }

@@ -52,6 +52,8 @@ namespace ConnectSQLServer
                 Console.WriteLine("Connection successful!");
                 //QueryDienthoai(conn);
                 Console.WriteLine("------------------------------------------------------------------------------------------");
+                FunctionContDBSQLServer.Creprocedure(conn);
+                //FunctionContDBSQLServer.VAT(conn);
                 FunctionContDBSQLServer.thaotac(conn);
 
                 //InsertDB(conn);
